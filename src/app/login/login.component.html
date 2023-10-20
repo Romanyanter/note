@@ -1,0 +1,51 @@
+<section class="login">
+  <div class="container card my-5">
+      <div class="row">
+          <div class="col-md-6">
+              <div class="login-image">
+                  <img class="w-100" src="assets/images/Login-rafiki.svg" alt="Photo-login" srcset="">
+              </div>
+          </div>
+          <div class="col-md-6 d-flex align-items-center justify-content-center">
+              <div class="login-form  w-100">
+                  <form [formGroup]="loginForm" (submit)="Signin(loginForm)">
+                      <label for="email">Email:</label>
+                      <input class="form-control mb-2" id="email" type="text" formControlName="email">
+                      <div class="alert alert-danger" *ngIf="loginForm.get('email')?.errors && loginForm.get('email')?.touched">
+                        <p class="m-0" *ngIf=" loginForm.get('email')?.getError('required') && loginForm.get('email')?.touched">Please Fill Out This Field</p>
+                        <p class="m-0" *ngIf="loginForm.get('email')?.getError('email') && loginForm.get('email')?.touched">Please Enter The Correct Email</p>
+                      </div>
+                      <label for="password">Password:</label>
+                      <div class="position-relative">
+                        <input #pass class="form-control mb-2" id="password" type="password" formControlName="password">
+                        <span (click)="passwordshow=true ; passwordshow == true?(pass.type='text'):(pass.type='password')"
+                        [ngClass]="{'d-none':passwordshow}" role="button"
+                        class="position-absolute top-50 end-0 translate-middle-y me-2">
+                        <i class="fas fa-eye text-black"></i>
+                        </span>
+                        <span (click)="passwordshow=false ; passwordshow == false?(pass.type='password'):(pass.type='text')"
+                        [ngClass]="{'d-none':!passwordshow}" role="button"
+                        class="position-absolute top-50 end-0 translate-middle-y me-2">
+                        <i class="fas fa-eye-slash text-black"></i>
+                        </span>
+                      </div>
+                    <div class="alert alert-danger" *ngIf="loginForm.get('password')?.errors && loginForm.get('password')?.touched">
+                    <p class="m-0" *ngIf=" loginForm.get('password')?.getError('required') && loginForm.get('password')?.touched">Please Fill Out This Field</p>
+                    <p class="m-0" *ngIf="loginForm.get('password')?.getError('maxlength') && loginForm.get('password')?.touched">required max Length is 10</p>
+                    <p class="m-0" *ngIf="loginForm.get('password')?.getError('minlength') && loginForm.get('password')?.touched">required min Length is 6</p>
+                  </div>
+                      <button *ngIf="!isDone" type="submit" class="btn login-button my-2 w-100 d-block m-auto" [disabled]="!loginForm.valid">Login</button>
+                      <button *ngIf="isDone" type="submit" class="btn login-button my-2 w-100 d-block m-auto"><i class="fas fa-spinner fa-spin"></i></button>
+                      <div class="alert alert-danger" *ngIf="masgerror">
+                        <p class="text-center">{{Masg}}</p>
+
+                      </div>
+                  
+                    </form>
+              </div>
+          </div>
+      </div>
+  </div>
+
+</section>
+

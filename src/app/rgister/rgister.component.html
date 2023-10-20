@@ -1,0 +1,69 @@
+<section class="register">
+  <div class="container card my-5">
+      <div class="row">
+          <div class="col-md-6">
+              <div class="register-image">
+                  <img class="w-100" src="./assets/images/Sign up-rafiki.svg" alt="" srcset="">
+              </div>
+          </div>
+          <div class="col-md-6 d-flex align-items-center justify-content-center">
+              <div class="register-form  w-100">
+                  <form [formGroup]="SignUpFrom" (submit)="SignUp(SignUpFrom)">
+                      <label for="name">Name:</label>
+                      <input class="form-control mb-2" id="name" type="text" formControlName="name">
+                      <div class="alert alert-danger" *ngIf="SignUpFrom.get('name')?.errors && SignUpFrom.get('name')?.touched">
+                        <p class="m-0" *ngIf="SignUpFrom.get('name')?.getError('required') && SignUpFrom.get('name')?.touched "> Please Fill Out This Field</p>
+                        <p class="m-0" *ngIf="SignUpFrom.get('name')?.getError('maxlength') && SignUpFrom.get('name')?.touched">required max Length is 10</p>
+                        <p class="m-0" *ngIf="SignUpFrom.get('name')?.getError('minlength') && SignUpFrom.get('name')?.touched">required min Length is 6</p>
+                      </div>
+
+                      <label for="email">Email:</label>
+                      <input formControlName="email" class="form-control mb-2" id="email" type="text">
+                      <div class="alert alert-danger" *ngIf="SignUpFrom.get('email')?.errors && SignUpFrom.get('email')?.touched">
+                        <p class="m-0" *ngIf="SignUpFrom.get('email')?.getError('required') && SignUpFrom.get('email')?.touched ">Please Fill Out This Field</p>
+                        <p class="m-0" *ngIf="SignUpFrom.get('email')?.getError('email') && SignUpFrom.get('email')?.touched ">Please Enter The Correct Email</p>
+                      </div>
+
+                      <label for="password">Password:</label>
+                      <div class="position-relative">
+                        <input #pass class="form-control mb-2" id="password" type="password" formControlName="password">
+                        <span (click)="passwordshow=true;passwordshow==true?(pass.type='text'):(pass.type='password')"
+                        [ngClass]="{'d-none':passwordshow}" role="button"
+                        class="position-absolute top-50 end-0 translate-middle-y me-2">
+                        <i class="fas fa-eye text-black"></i>
+                        </span>
+                        <span (click)="passwordshow=false;passwordshow==false?(pass.type='password'):(pass.type='text')"
+                        [ngClass]="{'d-none':!passwordshow}" role="button"
+                        class="position-absolute top-50 end-0 translate-middle-y me-2">
+                        <i class="fas fa-eye-slash text-black"></i>
+                        </span>
+                      </div>
+                      <div class="alert alert-danger" *ngIf="SignUpFrom.get('password')?.errors && SignUpFrom.get('password')?.touched">
+                      <p class="m-0" *ngIf=" SignUpFrom.get('password')?.getError('required') && SignUpFrom.get('password')?.touched">Please Fill Out This Field</p>
+                      <p class="m-0" *ngIf="SignUpFrom.get('password')?.getError('maxlength') && SignUpFrom.get('password')?.touched">required max Length is 10</p>
+                      <p class="m-0" *ngIf="SignUpFrom.get('password')?.getError('minlength') && SignUpFrom.get('password')?.touched">required min Length is 6</p>
+                    </div>
+                      <label for="age">Age:</label>
+                      <input class="form-control mb-2" id="age" type="number" formControlName="age">
+                      <div class="alert alert-danger" *ngIf="SignUpFrom.get('age')?.errors && SignUpFrom.get('age')?.touched">
+                        <p class="m-0" *ngIf="SignUpFrom.get('age')?.getError('required') && SignUpFrom.get('age')?.touched">Please Fill Out This Field</p>
+                      </div>
+
+                      <label for="phone">Phone:</label>
+                      <input class="form-control mb-2" id="phone" type="phone" formControlName="phone">
+                      <div class="alert alert-danger" *ngIf="SignUpFrom.get('phone')?.errors && SignUpFrom.get('phone')?.touched">
+                        <p class="m-0" *ngIf="SignUpFrom.get('phone')?.getError('required') && SignUpFrom.get('phone')?.touched">Please Fill Out This Field</p>
+                        <p class="m-0" *ngIf="SignUpFrom.get('phone')?.getError('pattern') && SignUpFrom.get('phone')?.touched">Please Enter The Correct Phone</p>
+                      </div>
+                        <button type="submit"*ngIf="!isDone" [disabled]="!SignUpFrom.valid" class="btn submit-button my-2 w-100 d-block m-auto">Sign Up!</button>
+                        <button type="submit" *ngIf="isDone" [disabled]="!SignUpFrom.valid" class="btn submit-button my-2 w-100 d-block m-auto"> <i class="fas fa-spinner fa-spin"></i></button>                  
+                    </form>
+                    <div class="alert alert-danger" *ngIf="isapper">
+                      <p class="text-center fs-5">{{isMsg}}</p>
+                    </div>
+              </div>
+          </div>
+      </div>
+  </div>
+
+</section>
